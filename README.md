@@ -8,7 +8,7 @@ Requirement Clarification
 
 Planning
 
-        Head
+        Header
          Body
         Sidebar
            MenuItem
@@ -17,5 +17,11 @@ Planning
         - VideoContainer
         -  VideoCard
       
+Header
+- header done with grid pattern used
+- side bar component build
+- Redux store created 
+- Manage the side bar Menu using React store
+-      
         
   
