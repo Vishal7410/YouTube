@@ -1,5 +1,4 @@
 /* eslint-disable react/prop-types */
-import React from 'react'
 
 const VideoCard = ({info}) => {
   // Check if info is define before destructuring
