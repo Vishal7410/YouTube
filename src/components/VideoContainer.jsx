@@ -24,7 +24,7 @@ const getYoutubeVideo = async() => {
 }
   return (
     <div className='flex flex-wrap'>
-      {videos.map((videos)=> <VideoCard key={videos.id} info={videos} />   )}
+      {videos.map((videos)=> <VideoCard key={videos.id} info={videos} />)}
              
     </div>
   )
