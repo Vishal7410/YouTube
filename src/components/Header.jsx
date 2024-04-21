@@ -1,11 +1,51 @@
 import { useDispatch } from "react-redux";
 import { toggleMenu } from "../utils/appSlice";
+import { useEffect, useState } from "react";
+import {YOUTUBE_SUGGESTION_API } from "../utils/constants";
 
 const Header = () => {
+
+  const [searchQuery, setSearchQuery] = useState("")
+  const [suggestion, setSuggestion] = useState([])
+
+  useEffect(()=> {
+    //Api call here
+    const timer = setTimeout(() => getSearchSuggestion(), 200);
+    return () => {
+      clearTimeout(timer)
+    };
+  }, [searchQuery]);
+
+  /*
+
+  *key press - i
+  - render the component
+  - useEffect();
+  - start timer => make API call after 200ms
+
+  * Key - ip
+  
+  - destroy the  component(useEffect return method)
+  - re-render the component 
+  - useEffect()
+  - start timer => make api call afetr 200ms 
+
+  -setTimeOut(200) - make an API call
+
+  */
+
+  const getSearchSuggestion = async ()=> {
+    console.log("API CALL - " + searchQuery);
+
+    const data = await fetch(YOUTUBE_SUGGESTION_API+searchQuery)
+    const json = await data.json();
+    // console.log(json[1]);
+    setSuggestion(json[1])
+  }
+
    const dispatch = useDispatch();
 
    const toggleMenuHandler = () =>{
-    
     dispatch(toggleMenu())
 
    }
@@ -26,11 +66,23 @@ const Header = () => {
       </div>
       
       <div  className="col-span-10 px-10">
+        <div>
         <input
-         className="w-1/2 border border-gray-400 rounded-l-full p-2"
+         className="px-5 w-1/2 border border-gray-400 rounded-l-full p-2"
         type="text" placeholder="Search" 
+        value = {searchQuery}
+        onChange={(e)=> setSearchQuery(e.target.value)}
        />
-        <button className="border border-gray-400 rounded-r-full p-2 bg-gray-100">Search</button>
+        <button className=" w-16 border border-gray-400 rounded-r-full p-2  bg-gray-100">🔍</button>
+        </div>
+        <div className="fixed bg-white py-2 px-3 w-[29.5rem] shadow-lg rounded-lg border border-gray-100"> 
+          <ul> 
+            {suggestion.map((s)=>(
+            <li key={s} className="py-2 px-2 shadow-sm hover:bg-gray-200 ">🔎 {s}</li>) )}
+           
+           
+          </ul>
+        </div>
       </div>
       <div>
         <img

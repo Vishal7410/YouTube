@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { YOUTUBE_VIDEO_API } from '../utils/constants';
- import VideoCard from './VideoCard'
+ import VideoCard, { AdVideoCard } from './VideoCard'
 import { Link } from 'react-router-dom';
 
 
@@ -25,10 +25,10 @@ const getYoutubeVideo = async() => {
 }
   return (
     <div className='flex flex-wrap'>
-      
+      <AdVideoCard info={videos[0]}/>
       {videos.map((videos)=> ( 
      // eslint-disable-next-line react/jsx-key
-     <Link to={"/watch?v="+videos.id}><VideoCard key={videos.id} info={videos}/></Link> ))}
+     <Link to={"/watch?v="+videos.id} key={videos.id} ><VideoCard  info={videos}/></Link> ))}
              
     </div>
   )
